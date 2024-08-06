@@ -1,6 +1,9 @@
 import numpy as np
 import time
 from common import get_args,experiment_setup
+import panda_gym
+import gymnasium
+
 
 if __name__=='__main__':
 	args = get_args()

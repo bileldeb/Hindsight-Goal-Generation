@@ -11,7 +11,7 @@ from beautifultable import BeautifulTable
 
 def str2bool(value):
 	if isinstance(value, bool):
-	   return value
+		return value
 	if value.lower() in ['yes', 'true', 't', 'y', '1']:
 		return True
 	elif value.lower() in ['no', 'false', 'f', 'n', '0']:
@@ -54,8 +54,8 @@ class Logger:
 	def __init__(self, name):
 		make_dir('log',clear=False)
 		make_dir('log/text',clear=False)
-		if name is None: self.name = time.strftime('%Y-%m-%d-%H:%M:%S')
-		else: self.name = name + time.strftime('-(%Y-%m-%d-%H:%M:%S)')
+		if name is None: self.name = time.strftime('%Y-%m-%d-%H-%M-%S')
+		else: self.name = name + time.strftime('-(%Y-%m-%d-%H-%M-%S)')
 
 		log_file = 'log/text/'+self.name+'.log'
 		self.logger = logging.getLogger(log_file)

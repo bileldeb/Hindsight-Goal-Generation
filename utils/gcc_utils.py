@@ -10,9 +10,9 @@ def c_int(value):
 def gcc_complie(c_path, so_path=None):
 	assert c_path[-2:]=='.c'
 	if so_path is None:
-		so_path = c_path[:-2]+'.so'
+		so_path = c_path[:-2]+'.dll'
 	else:
-		assert so_path[-3:]=='.so'
+		assert so_path[-3:]=='.dll'
 	os.system('gcc -o '+so_path+' -shared -fPIC '+c_path+' -O2')
 	return so_path
 
@@ -20,5 +20,6 @@ def gcc_load_lib(lib_path):
 	if lib_path[-2:]=='.c':
 		lib_path = gcc_complie(lib_path)
 	else:
-		assert so_path[-3:]=='.so'
+		assert lib_path[-3:]=='.dll'
+	print('##########',lib_path,'###############')
 	return ctypes.cdll.LoadLibrary(lib_path)

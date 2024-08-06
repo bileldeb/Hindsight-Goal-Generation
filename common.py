@@ -14,7 +14,7 @@ def get_args():
 	parser.add_argument('--alg', help='backend algorithm', type=str, default='ddpg', choices=['ddpg', 'ddpg2'])
 	parser.add_argument('--learn', help='type of training method', type=str, default='hgg', choices=learner_collection.keys())
 
-	parser.add_argument('--env', help='gym env id', type=str, default='FetchReach-v1', choices=Robotics_envs_id)
+	parser.add_argument('--env', help='gym env id', type=str, default='PandaMobilePickAndPlace-v3', choices=Robotics_envs_id)
 	args, _ = parser.parse_known_args()
 	if args.env=='HandReach-v0':
 		parser.add_argument('--goal', help='method of goal generation', type=str, default='reach', choices=['vanilla', 'reach'])
@@ -37,8 +37,8 @@ def get_args():
 
 	parser.add_argument('--epochs', help='number of epochs', type=np.int32, default=20)
 	parser.add_argument('--cycles', help='number of cycles per epoch', type=np.int32, default=20)
-	parser.add_argument('--episodes', help='number of episodes per cycle', type=np.int32, default=50)
-	parser.add_argument('--timesteps', help='number of timesteps per episode', type=np.int32, default=(50 if args.env[:5]=='Fetch' else 100))
+	parser.add_argument('--episodes', help='number of episodes per cycle', type=np.int32, default=5)
+	parser.add_argument('--timesteps', help='number of timesteps per episode', type=np.int32, default=200)
 	parser.add_argument('--train_batches', help='number of batches to train per episode', type=np.int32, default=20)
 
 	parser.add_argument('--buffer_size', help='number of episodes in replay buffer', type=np.int32, default=10000)

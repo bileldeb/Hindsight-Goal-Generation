@@ -1,6 +1,11 @@
 import math
 import numpy as np
-from gym.envs.robotics.hand.manipulate import quat_from_angle_and_axis
+from scipy.spatial.transform import Rotation as R
+
+def quat_from_angle_and_axis(angle, axis):
+    r = R.from_rotvec(angle * np.asarray(axis))
+    return r.as_quat() 
+
 
 def goal_distance(goal_a, goal_b):
 	return np.linalg.norm(goal_a - goal_b, ord=2)
@@ -31,7 +36,7 @@ def fetchpush_obstacle_distance(goal_a, goal_b):
 
 def get_goal_distance(args):
 	if args.goal=='obstacle':
-		assert args.env=='FetchPush-v1'
+		assert args.env=='FetchPush-v3'
 		return fetchpush_obstacle_distance
 	else:
 		return goal_distance

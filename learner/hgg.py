@@ -73,8 +73,8 @@ class MatchSampler:
 	def find(self, goal):
 		res = np.sqrt(np.sum(np.square(self.pool-goal),axis=1))
 		idx = np.argmin(res)
-		if test_pool:
-			self.args.logger.add_record('Distance/sampler', res[idx])
+		# if test_pool:
+		# 	self.args.logger.add_record('Distance/sampler', res[idx])
 		return self.pool[idx].copy()
 
 	def update(self, initial_goals, desired_goals):
@@ -143,7 +143,11 @@ class HGGLearner:
 
 		self.env_List = []
 		for i in range(args.episodes):
-			self.env_List.append(make_env(args))
+			print('############################ env: ',i,'#########################')
+			if i==0:
+				self.env_List.append(make_env(args,render_mode='human'))
+			else:
+				self.env_List.append(make_env(args))
 
 		self.achieved_trajectory_pool = TrajectoryPool(args, args.hgg_pool_size)
 		self.sampler = MatchSampler(args, self.achieved_trajectory_pool)
@@ -194,3 +198,4 @@ class HGGLearner:
 				selection_trajectory_idx[i] = True
 		for idx in selection_trajectory_idx.keys():
 			self.achieved_trajectory_pool.insert(achieved_trajectories[idx].copy(), achieved_init_states[idx].copy())
+		print('number of valid trajectories collected :',len(self.achieved_trajectory_pool.pool))
