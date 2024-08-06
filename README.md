@@ -1,24 +1,24 @@
 # Hindsight Goal Generation (HGG)
 
-This is a TensorFlow implementation for our paper [Exploration via Hindsight Goal Generation](http://arxiv.org/abs/1906.04279) accepted by NeurIPS 2019.
+HGG fork to enable hgg on a pybullet mobile manipulator 
 
 
 ## Requirements
-1. Python 3.6.9
-2. MuJoCo == 1.50.1.68
-3. TensorFlow >= 1.8.0
-4. BeautifulTable == 0.7.0
-5. gym < 0.22
+conda create -n hggenv python = 3.7
+conda activate hggenv
+pip install tensorflow==1.15
+pip install protobuf==3.20.0
+pip install BeautifulTable==0.7.0
+pip install path/to/pandagym
 
 ## Running Commands
 
-Run the following commands to reproduce our main results shown in section 5.1.
+default env PandaMobilePickAndPlace-v3
+episodes the number of hindsight goals
 
 ```bash
-python train.py --tag='HGG_fetch_push' --env=FetchPush-v3
-python train.py --tag='HGG_fetch_pick' --env=FetchPickAndPlace-v3
-python train.py --tag='HGG_hand_block' --env=HandManipulateBlock-v0
-python train.py --tag='HGG_hand_egg' --env=HandManipulateEgg-v0
+python train.py  
+python train.py  --env=PandaReach-v3
+python train.py  --env=PandaMobileReach-v3 --episodes=15 --timesteps=300
 
-python train.py --tag='HGG_fetch_push_with_obstacle' --env=FetchPush-v3 --goal=obstacle
 ```
