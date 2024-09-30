@@ -5,7 +5,10 @@ from .vanilla import VanillaGoalEnv
 Robotics_envs_id = [
 	'PandaMobilePickAndPlace-v3',
 	'PandaMobileReach-v3',
+	'PandaMobileSlide-v3',
+	'PandaSlide-v3',
 	'PandaReach-v3',
+	'PandaPickAndPlace-v3',
 ]
 
 def make_env(args,render_mode='rgb_array'):
@@ -14,8 +17,11 @@ def make_env(args,render_mode='rgb_array'):
 def clip_return_range(args):
 	gamma_sum = 1.0/(1.0-args.gamma)
 	return {
+		'PandaPickAndPlace-v3':(-gamma_sum, 0.0),
 		'PandaMobilePickAndPlace-v3':(-gamma_sum, 0.0),
-		'PandaMobileReach-v3':(-gamma_sum, 0.0),
 		'PandaReach-v3':(-gamma_sum, 0.0),
+		'PandaMobileReach-v3':(-gamma_sum, 0.0),
+		'PandaSlide-v3':(-gamma_sum, 0.0),
+		'PandaMobileSlide-v3':(-gamma_sum, 0.0),
 	}[args.env]
 

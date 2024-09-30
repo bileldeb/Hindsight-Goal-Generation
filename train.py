@@ -8,6 +8,7 @@ import gymnasium
 if __name__=='__main__':
 	args = get_args()
 	env, env_test, agent, buffer, learner, tester = experiment_setup(args)
+	agent.load_network('checkpoints/mobile_reach_task_hgg/checkpoint.bilel')
 
 	args.logger.summary_init(agent.graph, agent.sess)
 
@@ -28,7 +29,18 @@ if __name__=='__main__':
 
 	args.logger.summary_setup()
 
+	# max_episode_length = 1000
+	# min_episode_length = 500 
+
+	args.timesteps = 350
+
 	for epoch in range(args.epochs):
+		p = epoch / args.epochs
+		args.hssgg_beta = 0.75-3*p/4
+		# episode_length = (1-p)*min_episode_length + p*max_episode_length
+		# episode_length = int(episode_length)
+		# print('Epoch:',epoch,'| Number of timesteps per episode:',episode_length)
+		# args.timesteps = episode_length
 		for cycle in range(args.cycles):
 			args.logger.tabular_clear()
 			args.logger.summary_clear()
@@ -49,3 +61,4 @@ if __name__=='__main__':
 		tester.epoch_summary()
 
 	tester.final_summary()
+	agent.save_network('checkpoints/mobile_slide_task/pretrained_hgg/checkpoint.bilel')

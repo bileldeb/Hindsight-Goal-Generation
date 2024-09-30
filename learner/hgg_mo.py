@@ -180,13 +180,10 @@ class HGGLearner:
 					fake_obs['desired_goal'] = fake_obs['achieved_goal']
 					fake_obs['achieved_goal'] = fake_obs['observation'][:3]
 					explore = False
-				if timestep> 7*args.timesteps/20:
-					fake_obs['achieved_goal'] = fake_obs['observation'][:3]
-					explore = False
 				else:
 					explore = True
 					args.std_act = 0.05
-				action = agent.step(fake_obs, explore=explore)
+				action = agent.step(obs, explore=True)
 				obs, reward, done, info = self.env_List[i].step(action)
 				trajectory.append(obs['achieved_goal'].copy())
 				if timestep==args.timesteps-1: done = True

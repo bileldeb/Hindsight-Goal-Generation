@@ -50,6 +50,7 @@ def get_args():
 	parser.add_argument('--pool_rule', help='rule of collecting achieved states', type=str, default='full', choices=['full', 'final'])
 
 	parser.add_argument('--hgg_c', help='weight of initial distribution in flow learner', type=np.float32, default=3.0)
+	parser.add_argument('--hssgg_beta', help='weight of initial distribution in flow learner', type=np.float32, default=0.95)
 	parser.add_argument('--hgg_L', help='Lipschitz constant', type=np.float32, default=5.0)
 	parser.add_argument('--hgg_pool_size', help='size of achieved trajectories pool', type=np.int32, default=1000)
 

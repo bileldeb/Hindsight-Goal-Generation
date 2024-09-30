@@ -82,13 +82,13 @@ class VanillaGoalEnv():
 	def sim(self, new_sim):
 		self.env.sim = new_sim
 
-	# @property
-	# def initial_state(self):
-	# 	return self.env.initial_state
+	@property
+	def initial_state(self):
+		return self.env.get_initial_state()
 
-	# @initial_state.setter()
-	# def initial_state(self, value):
-	# 	self.env.initial_state = value.copy()
+	@initial_state.setter
+	def initial_state(self, value):
+		self.env.set_initial_state(value.copy())
 
 	@property
 	def initial_gripper_xpos(self):
@@ -96,7 +96,7 @@ class VanillaGoalEnv():
 
 	@property
 	def goal(self):
-		return self.env.goal.copy()
+		return self.env.get_goal().copy()
 	@goal.setter
 	def goal(self, value):
-		self.env.goal = value.copy()
+		self.env.set_goal(value.copy())

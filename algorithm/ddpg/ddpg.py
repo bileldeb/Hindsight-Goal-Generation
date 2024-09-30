@@ -119,7 +119,7 @@ class DDPG:
 
 		# eps-greedy exploration
 		if explore and np.random.uniform()<=self.args.eps_act:
-			return np.random.uniform(-1, 1, size=self.args.acts_dims)
+			return self.args.std_act*np.random.uniform(-1, 1, size=self.args.acts_dims)
 
 		feed_dict = {
 			self.raw_obs_ph: [obs]
@@ -166,3 +166,13 @@ class DDPG:
 
 	def target_update(self):
 		self.sess.run(self.target_update_op)
+
+	def save_network(self, save_path):
+		"""Save the network to a specified path."""
+		save_path_full = self.saver.save(self.sess, save_path)
+		print(f"Model saved in path: {save_path_full}")
+
+	def load_network(self, load_path):
+		"""Load the network from a specified path."""
+		self.saver.restore(self.sess, load_path)
+		print(f"Model restored from path: {load_path}")
